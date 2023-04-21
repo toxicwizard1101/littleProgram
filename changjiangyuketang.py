@@ -23,6 +23,11 @@ def thread_it(func, *args):
 
 def openWeb():
     global wd
+    # classtext = []
+    if cmb.get() == '':
+        print('empty')
+    else:
+        cmb.delete()
     wd = webdriver.Chrome()
     wd.get('https://changjiang.yuketang.cn/v2/web/index')
     wd.maximize_window()
@@ -134,10 +139,8 @@ def openClass():
                         print("completed")
                         break
                 except:
-                    # 这边抛出异常的情况是进入期末考试
-                    # 加一个flag判断调用一次back还是两次，期末考试只需要一次back
+                    # 这边抛出异常的情况是进入期末考试,或者进入作业页面
                     i += 1
-                    # print(i)
                     flag = True
                     break
             if flag:
@@ -169,10 +172,9 @@ def openClass():
             button.click()
             continue
         except:
-            print(111)
             wd.quit()
             print("出错了")
-            continue
+            break
 
 
 classtext = []
@@ -184,9 +186,6 @@ tkinter.Label(top, text='选择课程').grid(row=0, column=1, sticky='w')
 cmb = ttk.Combobox(top)
 cmb.grid(row=0, column=2, columnspan=2, sticky='w')
 cmb.configure(state="readonly")
-# cmb.current(0)
-# e1 = tkinter.Entry(top)
-# e1.grid(row=0, column=1, sticky='w')
 tkinter.Button(top, text='手动打开网页', command=lambda: thread_it(openWeb)).grid(row=0, column=5, sticky='w')
 thread_it(openWeb)
 tkinter.Button(top, text='选择该课程', command=lambda: thread_it(openClass)).grid(row=0, column=4, sticky='w')

@@ -160,8 +160,3 @@ tkinter.Button(top, text='手动打开网页', command=lambda: thread_it(openWeb
 thread_it(openWeb)
 tkinter.Button(top, text='选择该课程', command=lambda: thread_it(openClass)).grid(row=0, column=4, sticky='w')
 top.mainloop()
-
-# //*[@id="pane--1"]/div/section[2]/div/div[2]/section[2]/div[2]/div/div[15]/div/section[1]/div[1]/span/svg
-# //*[@id="pane--1"]/div/section[2]/div/div[2]/section[2]/div[2]/div/div[14]/div/section[1]/div[1]/span/svg
-# //*[@id="pane--1"]/div/section[2]/div/div[2]/section[2]/div[1]/div/div[1]/div/section[1]/div[1]/span/svg
-# //*[@id="pane--1"]/div/section[2]/div/div[2]/section[2]/div[2]/div/div[1]/div/section/div[1]/span/svg

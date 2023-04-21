@@ -69,7 +69,44 @@ def openClass():
             break
         except:
             continue
-    # print(111)
+    time.sleep(0.5)
+    ing = 0
+    while 1:
+        try:
+            time.sleep(1)
+            buttons = wd.find_elements(By.XPATH, '//span[text()="进行中"]')
+            print('剩余进行中视频', len(buttons))
+            buttons[ing].click()
+            time.sleep(0.5)
+            while 1:
+                try:
+                    detail = wd.find_element(By.XPATH, '//span[contains(text(),"详情")]')
+                    detail.click()
+                    time.sleep(8)
+                    complete = wd.find_element(By.XPATH, '//li[contains(text(),"是否完成")]').text
+                    print(complete)
+                    icon = wd.find_element(By.XPATH,
+                                           '//*[@id="app"]/div[2]/div/div[2]/div[2]/div/div/div[1]/button/i')
+                    icon.click()
+                    time.sleep(10)
+                    if complete == "是否完成：已完成":
+                        print("completed")
+                        break
+                except:
+                    ing += 1
+                    break
+            wd.back()
+            wd.back()
+            time.sleep(1)
+            class_click = wd.find_element(By.XPATH, class_start + str(classtext.index(cmb.get()) + 1) + class_end)
+            class_click.click()
+            time.sleep(1)
+            button = wd.find_element(By.XPATH, '//span[contains(text(),"展开")]')
+            button.click()
+            continue
+        except:
+            print('进行中视频已看完')
+            break
     time.sleep(0.5)
     i = 0
     while 1:
@@ -78,7 +115,7 @@ def openClass():
             buttons = wd.find_elements(By.XPATH, '//span[text()="未开始"]')
             print(len(buttons))
             # for i in range(0, len(buttons) + 1):
-            print('i =', i)
+            print('剩余视频数量:', len(buttons))
             buttons[i].click()
             time.sleep(0.5)
             flag = False
@@ -99,7 +136,6 @@ def openClass():
                 except:
                     # 这边抛出异常的情况是进入期末考试
                     # 加一个flag判断调用一次back还是两次，期末考试只需要一次back
-                    # 之后换成break
                     i += 1
                     # print(i)
                     flag = True
@@ -113,7 +149,6 @@ def openClass():
                 time.sleep(1)
                 while 1:
                     try:
-                        # 两种模糊搜索方式 //<tag>[contains(text(),"xxx")]或者//<tag>[text()="xxx"]
                         button = wd.find_element(By.XPATH, '//span[contains(text(),"展开")]')
                         button.click()
                         break
@@ -130,17 +165,13 @@ def openClass():
             class_click = wd.find_element(By.XPATH, class_start + str(classtext.index(cmb.get()) + 1) + class_end)
             class_click.click()
             time.sleep(1)
-            # while 1:
-            #     try:
-            # 两种模糊搜索方式 //<tag>[contains(text(),"xxx")]或者//<tag>[text()="xxx"]
             button = wd.find_element(By.XPATH, '//span[contains(text(),"展开")]')
             button.click()
-                    # break
-                # except:
-                #     continue
             continue
         except:
             print(111)
+            wd.quit()
+            print("出错了")
             continue
 
 

@@ -9,3 +9,5 @@ some useful function
   v1.0.2 修复bug，加入播放进行中视频功能
 
   v1.0.3 修复bug
+
+  v1.0.4 修复手动打开网页时下拉栏反复增加的bug

@@ -23,12 +23,11 @@ def thread_it(func, *args):
 
 def openWeb():
     global wd
-    # classtext = []
-    if cmb.get() == '':
-        print('empty')
-    else:
-        cmb.delete()
-    wd = webdriver.Chrome()
+    cmb['value'] = ""
+    try:
+        wd = webdriver.Chrome()
+    except:
+        wd = webdriver.Edge()
     wd.get('https://changjiang.yuketang.cn/v2/web/index')
     wd.maximize_window()
     # 进入“我听的课”页面
